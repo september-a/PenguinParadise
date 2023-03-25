@@ -13,18 +13,19 @@ def buildWindow():
     label.pack(padx=10, pady=10)
 
     p1 = PanedWindow()
-    p1.pack(fill=BOTH, expand=1)
+    p1.pack(fill=BOTH, expand=2)
 
-    left = Label(p1, text="Left Panel", )
+    left = Label(p1, text="Left Panel", background="yellow")
     p1.add(left)
+    p1.pack(padx=(width/5), pady=(height/5))
 
-    p2 = PanedWindow(p1, orient=VERTICAL)
+    p2 = PanedWindow(p1)
+    p2.pack(fill=BOTH, expand=2)
     p1.add(p2)
 
-    c1 = Canvas(p2, bg= "blue")
-    p2.add(c1)
-
-
+    c1 = Canvas(p1, bg="blue")
+    c1.pack(fill=BOTH)
+    p1.add(c1)
 
     win.mainloop()
 
