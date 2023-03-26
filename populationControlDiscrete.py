@@ -26,7 +26,7 @@ def timeStep(currentPopulation, timeElapsed, currentPollution):
     else:
         return 0
 
-thisIsTheTimeStep = np.arange(1,16,1)
+thisIsTheTimeStep = np.(1,16,1)
 penguinPopulation = np.zeros(15)
 previousPollution = np.zeros(15)
 for i in range(len(thisIsTheTimeStep)):
