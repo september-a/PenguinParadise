@@ -65,11 +65,7 @@ def build_Window():
         if(numiterations % deathRate == 0):
             numPenguins -= 1
             if(numPenguins == 0):
-                print("Game Over")
-                top= Toplevel(win)
-                top.geometry("750x250")
-                top.title("Penguin Paradise")
-                Label(top, text= "You Lost!", font=('Mistral 18 bold')).place(x=150,y=80)
+                return 0
             c1.canvas.delete(penguin_list[0])
             del penguin_list[0]
         if(numiterations % 150 == 0 ):
@@ -80,10 +76,15 @@ def build_Window():
         numiterations += 1
         win.after(10,update)
     update()
-    win.mainloop()
-    # while numPenguins > 0:
-    #     win.update()
-    #     win.update_idletasks()
+    while numPenguins > 0:
+        win.update()
+        win.update_idletasks()
+    
+    top= Tk()
+    top.geometry("750x250")
+    top.title("Penguin Paradise")
+    Label(top, text= "You Lost!", font=('Mistral 18 bold')).place(x=150,y=80)
+    top.mainloop()
 
 
 build_Window()
