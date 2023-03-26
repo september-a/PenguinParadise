@@ -13,7 +13,7 @@ class MyCanvas(tk.Tk):
         MyCanvas.penguinImage = _image_prep("penguin.png")
         MyCanvas.trashbagImage = ImageTk.PhotoImage(Image.open("trashbag.png"))
         self.canvas = tk.Canvas(root,background="lightblue")
-        self.numTrashbags = 1
+        self.numTrashbags = 0
         root.bind('<Configure>', self.resize)
     
     def resize(self,event):
@@ -30,10 +30,12 @@ class MyCanvas(tk.Tk):
 
     def drawTrash(self,x,y):
         trash = self.canvas.create_image(x,y,anchor=tk.NW,image=MyCanvas.trashbagImage)
+        self.numTrashbags += 1
         def on_image_click(_):
+            self.numTrashbags -= 1 
             self.canvas.delete(trash)
         self.canvas.tag_bind(trash,"<Button-1>",on_image_click)
-        return trash
+        return self.numTrashbags
 
     # def deadPenguin(self):
     #     pass
