@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image,ImageTk
+import random
 
 def buildWindow():
     win = Tk()
@@ -31,12 +32,27 @@ def buildWindow():
     c1 = Canvas(win, bg="blue")
     c1.pack(fill="both",expand="true")
 
+    c1width = c1.winfo_width()
+    c1height = c1.winfo_height()
+    print(c1width)
+    print(c1height)
+
+
     penguinImage = Image.open("penguin.png")
     resized_image= penguinImage.resize((int(penguinImage.width/10),int(penguinImage.height/10)), Image.Resampling.LANCZOS)
     img= ImageTk.PhotoImage(resized_image)
+    for i in range(6):
+        for j in range(6):
+            c1.create_image(150 * j,100*i,anchor=NW,image=img)
+
+    trashbagImage = Image.open("trashbag.png")
+    resized_image2 = trashbagImage.resize((int(trashbagImage.width), int(trashbagImage.height)), Image.Resampling.LANCZOS)
+    img2 = ImageTk.PhotoImage(resized_image2)
     for i in range(10):
         for j in range(10):
-            c1.create_image(150 * j,100*i,anchor=NW,image=img)
+            c1.create_image(random.randint(5, c1width-5), random.randint(5, c1height-5),anchor=NW,image=img2)
+
+
 
     win.mainloop()
 
