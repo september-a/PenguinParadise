@@ -63,6 +63,8 @@ def buildWindow():
         if(numiterations % deathRate == 0):
             c1.canvas.delete(penguin_list[0])
             del penguin_list[0]
+        if(numiterations % 2 == 0 ):
+            c1.drawTrash(random.randint(0,750),random.randint(200,600))
         numiterations += 1
         win.after(1000,update)
     update()
