@@ -1,8 +1,9 @@
-from tkinter import NW, W, Tk,PanedWindow,Label,Entry
+from tkinter import NW, W, Tk,PanedWindow,Label,Entry,Toplevel
 from tkinter import ttk
 from PIL import Image,ImageTk
 import canvas
 import random
+import time
 
 def build_Window():
     poundsOfTrash = 0
@@ -41,8 +42,8 @@ def build_Window():
     c1.canvas.create_image(-50,175,anchor=NW,image=landscapeImage)
 
     penguin_list = []
-    birthRate = 5
-    deathRate = 7
+    birthRate = 50
+    deathRate = 70
     numiterations = 0
 
     
@@ -57,21 +58,32 @@ def build_Window():
         nonlocal numiterations
         nonlocal numPenguins
         nonlocal poundsOfTrash
+        deathRate = 70 - 5* poundsOfTrash
         if(numiterations % birthRate == 0):
             penguin_list.append(c1.drawPenguin(random.randint(0,750),random.randint(200,600)))
             numPenguins += 1
         if(numiterations % deathRate == 0):
             numPenguins -= 1
+            if(numPenguins == 0):
+                print("Game Over")
+                top= Toplevel(win)
+                top.geometry("750x250")
+                top.title("Penguin Paradise")
+                Label(top, text= "You Lost!", font=('Mistral 18 bold')).place(x=150,y=80)
             c1.canvas.delete(penguin_list[0])
             del penguin_list[0]
-        if(numiterations % 2 == 0 ):
-            poundsOfTrash = c1.drawTrash(random.randint(0,750),random.randint(200,600))
+        if(numiterations % 150 == 0 ):
+            c1.drawTrash(random.randint(0,750),random.randint(200,600))
+        poundsOfTrash = c1.numTrashbags
         population_Display["text"]=f"{numPenguins}"
         polution_Display["text" ]= f"{poundsOfTrash}"
         numiterations += 1
-        win.after(1000,update)
+        win.after(10,update)
     update()
     win.mainloop()
+    # while numPenguins > 0:
+    #     win.update()
+    #     win.update_idletasks()
 
 
 build_Window()
