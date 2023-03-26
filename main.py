@@ -39,21 +39,32 @@ def buildWindow():
     landscapeImage = ImageTk.PhotoImage(resized_image3)
     c1.canvas.create_image(-50,175,anchor=NW,image=landscapeImage)
 
-    penguinList = []
+    penguin_list = []
+    trashbag_list = []
+    birthRate = 5
+    deathRate = 7
+    numiterations = 0
+
     
     # Have three initial penguins added to the screen (a 4th is added in the update function)
-    penguinList.append(c1.drawPenguin(random.randint(0,750),random.randint(250,600)))
-    penguinList.append(c1.drawPenguin(random.randint(0,750),random.randint(250,600)))
-    penguinList.append(c1.drawPenguin(random.randint(0,750),random.randint(250,600)))
+    penguin_list.append(c1.drawPenguin(random.randint(0,750),random.randint(250,600)))
+    penguin_list.append(c1.drawPenguin(random.randint(0,750),random.randint(250,600)))
+    penguin_list.append(c1.drawPenguin(random.randint(0,750),random.randint(250,600)))
 
     # Update function for tkinter window
     def update():
-        nonlocal penguinList
-        penguinList.append(c1.drawPenguin(random.randint(0,750),random.randint(200,600)))
-        if(len(penguinList) > 8):
-            c1.canvas.delete(penguinList[0])
-            del penguinList[0]
-        win.after(random.randint(2,5)*1000,update)
+        nonlocal penguin_list
+        nonlocal trashbag_list
+        nonlocal birthRate
+        nonlocal deathRate
+        nonlocal numiterations
+        if(numiterations % birthRate == 0):
+            penguin_list.append(c1.drawPenguin(random.randint(0,750),random.randint(200,600)))
+        if(numiterations % deathRate == 0):
+            c1.canvas.delete(penguin_list[0])
+            del penguin_list[0]
+        numiterations += 1
+        win.after(1000,update)
     update()
     win.mainloop()
 
