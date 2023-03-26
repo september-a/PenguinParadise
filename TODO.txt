@@ -1,0 +1,7 @@
+GUI
+- Display numbers
+    - Population
+    - Pollution Level (Pounds of Trash)
+- Users click the trash to make it disappear
+- Music
+
