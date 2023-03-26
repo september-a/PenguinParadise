@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image,ImageTk
-import random
+import canvas
+import time
 
 def buildWindow():
     win = Tk()
@@ -29,31 +30,19 @@ def buildWindow():
     polution.grid(row = 1, column=0, sticky=W,pady=2)
     polutionEntry.grid(row=1,column=1, sticky=W,pady=2)
 
-    c1 = Canvas(win, bg="blue")
-    c1.pack(fill="both",expand="true")
+    c1 = canvas.MyCanvas(win)
+    c1.canvas.pack(fill="both",expand="true")
 
-    c1width = c1.winfo_width()
-    c1height = c1.winfo_height()
+    c1width = c1.canvas.winfo_width()
+    c1height = c1.canvas.winfo_height()
     print(c1width)
     print(c1height)
 
 
-    penguinImage = Image.open("penguin.png")
-    resized_image= penguinImage.resize((int(penguinImage.width/10),int(penguinImage.height/10)), Image.Resampling.LANCZOS)
-    img= ImageTk.PhotoImage(resized_image)
-    for i in range(6):
-        for j in range(6):
-            c1.create_image(150 * j,100*i,anchor=NW,image=img)
-
-    trashbagImage = Image.open("trashbag.png")
-    resized_image2 = trashbagImage.resize((int(trashbagImage.width), int(trashbagImage.height)), Image.Resampling.LANCZOS)
-    img2 = ImageTk.PhotoImage(resized_image2)
-    for i in range(10):
-        for j in range(10):
-            c1.create_image(random.randint(5, c1width-5), random.randint(5, c1height-5),anchor=NW,image=img2)
-
-
-
+    landscapeImage = Image.open("landscape.png")
+    resized_image3 = landscapeImage.resize((int(landscapeImage.width*5), int(landscapeImage.height*5)), Image.Resampling.LANCZOS)
+    landscapeImage = ImageTk.PhotoImage(resized_image3)
+    c1.canvas.create_image(-50,175,anchor=NW,image=landscapeImage)
     win.mainloop()
 
 
